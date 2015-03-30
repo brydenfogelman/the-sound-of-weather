@@ -22,12 +22,51 @@ $(document).on('ready', function(){
                 // need an if statement to deal with the case where a city searc
                 // has 2 results
                 var weather = response.current_observation.weather;
-                console.log(weather);
+                // create a query string based on the weather type
+                // should try and implement this better
+                // ie. create an external method?
+                //weather = weather.toLowerCase;
+                console.log(weather.indexOf("Cloud"))
+                var query_str = "";
+                if(weather.indexOf("Cloud") !== -1){
+                    query_str += "calm ";
+                    console.log(query_str);
+                }
+                if(weather.indexOf("Rain") !== -1){
+                    query_str += "sad ";
+                }
+                if(weather.indexOf("Sun") !== -1){
+                    query_str += "upbeat ";
+                }
+                query_str += "instrumental"
+
+                $.ajax({
+                    url: sc_url_header,
+                    type: 'get',
+                    //dataType: 'jsonp',
+                    data: {
+                        q: query_str,
+                        client_id: "63a8bfefff63b0f9386d4a03184c3b94",
+                        format: "json",
+                    },
+                    success: function(response){
+                        // need an if statement to deal with the case where a city searc
+                        // has 2 results
+                        //var weather = response.current_observation.weather;
+                        console.log(response);
+                    },
+                    error: function(){
+                        console.log("error");
+                    }
+                });
             },
             error: function(){
                 console.log("error");
             }
         });
+        
+        
+        /*
         $.ajax({
             url: sc_url_header,
             type: 'get',
@@ -47,24 +86,10 @@ $(document).on('ready', function(){
                 console.log("error");
             }
         });
+        */
     });
     
-    var get_music_from_weather = function(weather){
-        // create a query string based on the weather type
-        // should try and implement this better
-        // ie. create an external method?
-        var query_str;
-        if(weather.indexOf("cloud") != -1){
-            query_str += "calm ";
-        }
-        if(weather.indexOf("rain") != -1){
-            query_str += "sad ";
-        }
-        if(weather.indexOf("sun") != -1){
-            query_str += "upbeat ";
-        }
-        
-    }
+    
     
     // find all sounds of buskers licensed under 'creative commons share alike'
     /*
