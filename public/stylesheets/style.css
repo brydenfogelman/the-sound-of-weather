@@ -1,0 +1,17 @@
+/* Entire document */
+
+html * {
+    color: #16a085;
+    font-family: 'Droid Sans', sans-serif;
+}
+
+/* For javascript/jQuery */
+.error {
+    border-color: red;
+}
+
+#error-msg {
+    padding-left: 10px;
+    color: red;
+    font-weight: 200;
+}
