@@ -5,6 +5,7 @@ $(document).on('ready', function(){
         client_id: '63a8bfefff63b0f9386d4a03184c3b94'
     });
 
+    /*
     //sound manager setup
     soundManager.setup({
         url: '/path/to/swf-files/',
@@ -15,6 +16,7 @@ $(document).on('ready', function(){
             // Ready to use; soundManager.createSound() etc. can now be called.
         }
     });
+    */
 
     // set url for wunderground
     var wu_url = "http://api.wunderground.com/api/bebaf6d06e2bf9b4/geolookup/conditions/q/"; // state/city.json OR city.json
@@ -65,9 +67,22 @@ $(document).on('ready', function(){
                         // has 2 results
                         console.log(response);
                         console.log(response[0].stream_url);
-                        SC.stream(response[0].stream_url, function(sound){
-                            sound.play();
+                        //sound manager setup
+                        soundManager.setup({
+                            url: '/Users/brydenfogelman/Downloads/soundmanagerv297a-20140901/swf',
+                            flashVersion: 9, // optional: shiny features (default = 8)
+                            // optional: ignore Flash where possible, use 100% HTML5 mode
+                            // preferFlash: false,
+                            onready: function() {
+                                // Ready to use; soundManager.createSound() etc. can now be called.
+                                SC.stream(response[0].stream_url, function(sound){
+                                    sound.play();
+                                });
+                            }
                         });
+//                        SC.stream(response[0].stream_url, function(sound){
+//                            sound.play();
+//                        });
                     },
                     error: function(){
                         console.log("error");
